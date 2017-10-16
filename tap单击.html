@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0 maximum-scale=1.0 minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>tap单击手势封装</title>
+    <style>
+        html body {
+            margin: 0;
+            padding: 0;
+        }
+        
+        .box {
+            width: 1280px;
+            height: 500px;
+            background-color: pink;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box"></div>
+    <script>
+        var box = document.querySelector('.box');
+        console.log(box);
+        //点击开始位置startX/Y 结束位置endX/Y 开始时间 startTime 结束时间 endTime
+
+        //开始事件
+        box.addEventListener('touchstart', function(e) {
+
+            var touches = e.targetTouches[0];
+            startX = touches.clientX;
+            startY = touches.clientY;
+
+            //给开始事件获取一个开始时间
+            startTime = new Date().getTime();
+            console.log(startTime);
+        })
+
+        box.addEventListener('touchend', function(e) {
+            var touches = e.changedTouches[0];
+            endX = touches.clientX;
+            endY = touches.clientY;
+
+            //在次获取一个结束时间
+            endTime = new Date().getTime();
+            console.log(endTime);
+
+
+            if (Math.abs(endX - startX) < 5 && Math.abs(endY - startY) < 5 && endTime - startTime < 300) {
+
+                console.log('Tap手势触发了');
+            }
+        })
+    </script>
+</body>
+
+</html>

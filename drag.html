@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>drag拖拽</title>
+    <style>
+        html body {
+            margin: 0;
+            padding: 0;
+        }
+        
+        .box {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            width: 100px;
+            height: 100px;
+            background-color: pink;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box"></div>
+    <script>
+        var box = document.querySelector('.box');
+        //声明变量
+        var startX, startY, endX, endY, _left, _top;
+
+        box.addEventListener('touchstart', function(e) {
+            var touches = e.targetTouches[0];
+            startX = touches.clientX;
+            startY = touches.clientY;
+
+            //获取开始位置
+            _left = this.offsetLeft;
+
+            _top = this.offsetTop;
+
+        })
+        box.addEventListener('touchmove', function(e) {
+            var touches = e.changedTouches[0];
+
+            endX = touches.clientX;
+            endY = touches.clientY;
+
+
+
+            this.style.left = _left + (endX - startX) + 'px';
+            this.style.top = _top + (endY - startY) + 'px';
+        })
+    </script>
+</body>
+
+</html>
